@@ -46,6 +46,7 @@ public class FIFO {
         }
 
         // Run scheduling function with processDatas as input
+        System.out.println("This is just test");
     }
     
 }
