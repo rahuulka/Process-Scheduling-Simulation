@@ -48,7 +48,50 @@ public class FIFO {
         }
 
         // Run scheduling function with processDatas as input
-        System.out.println("This is just test");
+        fifoScheduling(processDatas);
     }
-    
+
+    // actual algorithm for sorting, avg wt, avg tat
+    public static void fifoScheduling(List<ProcessData> processDatas) {
+        // FIFO = sort by Arrival Time
+        processDatas.sort(Comparator.comparingInt(p->p.Arrival_Time)); // extrac Arrival_Time from processDatas and compare and sort
+
+        // deining variables needed to calculate avg wt, avg tat
+        int Current_Time = 0;
+        int Total_Waiting_Time = 0;
+        int Total_Turnaround_Time = 0;
+
+        // print header
+        System.out.println("PID Arrival Burst Completion Waiting Turnaround");
+
+        for (ProcessData processData : processDatas) {
+            if (Current_Time < processData.Arrival_Time) {
+                Current_Time = processData.Arrival_Time; // update current time only when it is less than Arrival_Time (CPU is Idle)
+            }
+            
+            // process start at curren_time and run for burst = total completion time
+            processData.Completion_Time = Current_Time + processData.Burst_Time; 
+            // total time from arrival to completion
+            processData.Turnarount_Time = processData.Completion_Time - processData.Arrival_Time;
+            // time for waiting before execution = Turnaround - burst 
+            processData.Waiting_Time = processData.Turnarount_Time - processData.Burst_Time;
+            
+            Total_Waiting_Time += processData.Waiting_Time; // add up all the waiting time
+            Total_Turnaround_Time += processData.Turnarount_Time; // add up all the turnaround time
+
+            System.out.printf("%3d  %6d  %5d  %10d  %7d  %10d\n", //formatting white space in number of char in name
+            processData.PID, processData.Arrival_Time, processData.Burst_Time, 
+            processData.Completion_Time, processData.Waiting_Time, processData.Turnarount_Time); //print datas in such order
+
+            Current_Time = processData.Completion_Time; //update time after process completed
+        }
+
+        // calculate for avg? total / n
+            double average_WaitingTime = (double) Total_Waiting_Time / processDatas.size(); 
+            double average_TurnaroundTime = (double) Total_Turnaround_Time / processDatas.size();
+
+            System.out.printf("\nAverage Waiting Time: %.2f\n", average_WaitingTime); // print avg time next line with 2 decimal
+            System.out.printf("\nAverage Turnaround Time: %.2f\n", average_TurnaroundTime);
+    }
 }
+
