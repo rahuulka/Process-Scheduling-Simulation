@@ -28,6 +28,8 @@ public class FIFO {
             File file = new File("processes.txt"); // processes.txt is what we going to scan
             Scanner scanner = new Scanner(file); // scan file a.k.a processes.txt
 
+            if (scanner.hasNextLine()) scanner.nextLine(); // skip the header!
+
             while (scanner.hasNextLine()) { // keep scanning as long as there is next line
                 // split the line into data whenever there is one ore more white spaces
                 String[] data = scanner.nextLine().split("\\s+"); 
@@ -41,7 +43,7 @@ public class FIFO {
 
         } catch (Exception e) {
             // TODO: handle exception
-            System.out.println("Error reading file");
+            System.out.println("Error reading file: " + e.getMessage()); // make sure to show what kind of error
             return;
         }
 
