@@ -8,6 +8,7 @@ This project simulates how an Operating System schedules processes using differe
 - Implements two scheduling algorithms: **First-Come, First-Served (FCFS)** and **Shortest Job First (SJF)**.
 - Displays a **Gantt Chart** to show execution order.
 - Computes **Waiting Time (WT)** and **Turnaround Time (TAT)**.
+- Calculates **average WT and TAT** for performance analysis.
 
 ## How to Use
 ### Prerequisites
