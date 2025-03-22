@@ -5,7 +5,7 @@ This project simulates how an Operating System schedules processes using differe
 
 ## Features
 - Reads process data from a file (`processes.txt`).
-- Implements two scheduling algorithms: **First-Come, First-Served (FCFS)** and **Round Robin (RR)**.
+- Implements two scheduling algorithms: **First-Come, First-Served (FCFS)** and **Shortest Job First (SJF)**.
 - Displays a **Gantt Chart** to show execution order.
 - Computes **Waiting Time (WT)** and **Turnaround Time (TAT)**.
 
